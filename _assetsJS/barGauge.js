@@ -17,7 +17,6 @@ define(['d3','jquery'],function (d3,$) {
     BarGauge.prototype.constructor = BarGauge;
 
 
-
         'use strict';
 
         var options = {
@@ -26,13 +25,12 @@ define(['d3','jquery'],function (d3,$) {
         };
 
 
-
         function makeModel(widget) {
             var value,
                 min = widget.$min =  widget.$min,
                 max = widget.$max = widget.$max,
-                autoScale = props.getValue("autoScale"),
-                autoScaleStep = props.getValue("autoScaleStep");
+                autoScale = 10,
+                autoScaleStep = 10;
 
             if (value === undefined || value === null) {
                 value = 0;
@@ -50,9 +48,8 @@ define(['d3','jquery'],function (d3,$) {
                 value = parseFloat(value);
             }
 
-            if (!_.isNumber(value)) {
-                value = 0;
-            }
+
+            value=10;
 
             if (autoScale) {
                 // Figure out the minimum scale.
@@ -97,8 +94,7 @@ define(['d3','jquery'],function (d3,$) {
             y = d3.scale.linear()
                 .range([0, height]);
 
-            gauge = d3.select(widget.jq()[0])
-                .select(".example-linear-gauge")
+            gauge = d3.select(".barGauge")
                 .select("g");
 
             // Render the background
@@ -151,7 +147,7 @@ define(['d3','jquery'],function (d3,$) {
 
             bar.attr("height", height / 2)
                 .transition()
-                .attr("fill", widget.properties().getValue("barColor"))
+                .attr("fill", "steelblue")
                 .attr("width", function (d) {
                     var w = x(d.value);
                     if (w > width) {
@@ -164,8 +160,7 @@ define(['d3','jquery'],function (d3,$) {
                 });
         }
 
-        BarGauge.prototype.doInitialize = function () {
-            var that = this;
+
 
 
 
@@ -180,9 +175,39 @@ define(['d3','jquery'],function (d3,$) {
                 .attr('transform', 'translate(' + options.left + ',' + options.top + ')');
 
 
-            render(that);
-        };
+            render(this);
 
+
+
+    // function onDocumentReady() {
+    //     define(['d3','jquery','BarGauge'],function (d3,$,BarGauge) {
+    //         var barGauge = Object.create(BarGauge);
+    //         console.log(barGauge);
+    //
+    //         //('#power-gauge', {
+    //         //     size: 300,
+    //         //     clipWidth: 300,
+    //         //     clipHeight: 300,
+    //         //     ringWidth: 60,
+    //         //     maxValue: 100,
+    //         //     transitionMs: 4000,
+    //         // });
+    //         // powerGauge.render();
+    //         //
+    //         // function updateReadings() {
+    //         //     // just pump in random data here...
+    //         //     var input =Math.random() * 100;
+    //         //     powerGauge.update(input);
+    //         //
+    //         // }
+    //         //
+    //         // // every few seconds update reading values
+    //         // updateReadings();
+    //         // setInterval(function() {
+    //         //     updateReadings();
+    //         // }, 5 * 1000);
+    //     })
+    // }
 
 
 
@@ -195,36 +220,3 @@ define(['d3','jquery'],function (d3,$) {
 
 
 
-function onDocumentReady() {
-    // var powerGauge = gauge('#power-gauge', {
-    //     size: 300,
-    //     clipWidth: 300,
-    //     clipHeight: 300,
-    //     ringWidth: 60,
-    //     maxValue: 100,
-    //     transitionMs: 4000,
-    // });
-    // powerGauge.render();
-    //
-    // function updateReadings() {
-    //     // just pump in random data here...
-    //     var input =Math.random() * 100;
-    //     powerGauge.update(input);
-    //
-    // }
-    //
-    // // every few seconds update reading values
-    // updateReadings();
-    // setInterval(function() {
-    //     updateReadings();
-    // }, 5 * 1000);
-}
-
-//call the gauge once the window is loaded
-if ( !window.isLoaded ) {
-    window.addEventListener("load", function() {
-        onDocumentReady();
-    }, false);
-} else {
-    onDocumentReady();
-}
