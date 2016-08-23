@@ -35,14 +35,6 @@ define(['d3','jquery'],function (d3,$) {
             if (value === undefined || value === null) {
                 value = 0;
             }
-            // If this is a control point then get its out value...
-            else if (value.getType().is("control:ControlPoint")) {
-                value = value.getOut().getValue();
-            }
-            // If this is a StatusNumeric then get its value...
-            else if (value.getType().is("baja:StatusNumeric")) {
-                value = value.getValue();
-            }
             else {
                 // Just hope we have a value...
                 value = parseFloat(value);
