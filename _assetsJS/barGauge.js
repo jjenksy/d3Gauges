@@ -6,7 +6,7 @@
  * Created by jjenkins on 8/9/2016.
  */
 //defines my require js module
-define(['d3','jquery'],function (d3,$) {
+define(['d3'],function (d3) {
 
     //create an pointless constructor
     var BarGauge = function () {
@@ -25,12 +25,11 @@ define(['d3','jquery'],function (d3,$) {
         };
 
 
-        function makeModel(widget) {
-            var value,
-                min = widget.$min =  widget.$min,
-                max = widget.$max = widget.$max,
-                autoScale = 10,
+        function makeModel(val, min , max) {
+            var value=val,
+                autoScale = false,
                 autoScaleStep = 10;
+
 
             if (value === undefined || value === null) {
                 value = 0;
@@ -39,9 +38,6 @@ define(['d3','jquery'],function (d3,$) {
                 // Just hope we have a value...
                 value = parseFloat(value);
             }
-
-
-            value=10;
 
             if (autoScale) {
                 // Figure out the minimum scale.
@@ -64,10 +60,10 @@ define(['d3','jquery'],function (d3,$) {
             };
         }
         // function to create the scalable graph
-        function render(widget) {
+        function render(val , min , max, color) {
             var width =  800 - options.left * 2,
                 height = 50,
-                model = makeModel(widget),
+                model = makeModel(val, min , max),
                 x,
                 y,
                 gauge,
@@ -75,6 +71,9 @@ define(['d3','jquery'],function (d3,$) {
                 grid,
                 axis,
                 bar;
+
+
+
             // linear: progressing from one stage to another in a single series of steps
             //scale for your x value
             x = d3.scale.linear()
@@ -83,63 +82,73 @@ define(['d3','jquery'],function (d3,$) {
                 //The difference between the lowest and highest values. In {4, 6, 9, 3, 7} the lowest value is 3, and the highest is 9, so the range is 9 − 3 = 6.
                 .range([0, width]);
 
+
             y = d3.scale.linear()
                 .range([0, height]);
 
-            gauge = d3.select(".barGauge")
+
+            gauge = d3.select("#barGauge")
+                .select(".barGauge-linear-gauge")
                 .select("g");
 
-            // Render the background
-            bk = gauge.selectAll(".example-linear-grid-background")
+
+            // Render the background from created class below
+            bk = gauge.selectAll(".barGauge-linear-gauge-background")
                 .data(model.data);
 
+            //create a background rect and add a class to it
             bk.enter()
                 .append("rect")
-                .attr("class", "example-linear-grid-background");
+                .attr("class", "barGauge-linear-gauge-background");
 
             bk.attr("width", width)
                 .attr("height", height);
 
-            // The background has a grid on top.
-            grid = gauge.selectAll(".example-linear-grid")
+            // The background has a grid on top. select the class from below
+            grid = gauge.selectAll(".barGauge-linear-grid")
                 .data(model.data);
-
+            //create a grid and add a class to it
             grid.enter()
                 .append("g")
-                .attr("class", "example-linear-grid");
+                .attr("class", "barGauge-linear-grid");
 
+
+            var ticksMinor = d3.svg.axis().scale(x).ticks(20).tickSize(-height);
             grid.attr("transform", "translate(0," + height + ")")
-                .call(d3.svg.axis().scale(x).ticks(50).tickSize(-height))
-                .selectAll(".example-linear-tick")
-                .data(x.ticks(10), function(d) { return d; })
+                .call(ticksMinor) // calling the tickMinor
+                .selectAll(".barGauge-linear-tick")
+                .data(x.ticks(10), function(d) {
+                    console.log(d);
+                    return d; })
                 .exit()
-                .classed("example-linear-minor", true);
+                .classed("barGauge-linear-minor", true);
 
             // The background has an axis drawn at the bottom of it.
-            axis = gauge.selectAll(".example-linear-axis")
+            axis = gauge.selectAll(".barGauge-linear-axis")
                 .data(model.data);
 
             axis.enter()
                 .append("g")
-                .attr("class", "example-linear-axis");
+                .attr("class", "barGauge-linear-axis");
 
+            var ticksMajor=d3.svg.axis().scale(x).ticks(10);
             axis.attr("transform", "translate(0," + height + ")")
-                .call(d3.svg.axis().scale(x).ticks(10));
+                .call(ticksMajor);
 
             // The data bar is drawn on top.
-            bar = gauge.selectAll(".example-linear-bar")
+            bar = gauge.selectAll(".barGauge-linear-bar")
                 .data(model.data);
 
             bar.enter()
                 .append("g")
                 .append("rect")
-                .attr("class", "example-linear-bar")
+                .attr("class", "barGauge-linear-bar")
                 .attr("x", 0)
                 .attr("y", 0);
 
-            bar.attr("height", height / 2)
+            bar.attr("height", height ) //height of the moving bar
                 .transition()
-                .attr("fill", "steelblue")
+                .attr("fill", color)//color of the moving bar
                 .attr("width", function (d) {
                     var w = x(d.value);
                     if (w > width) {
@@ -155,52 +164,27 @@ define(['d3','jquery'],function (d3,$) {
 
 
 
+    d3.select("#barGauge")
+        .append('svg')
+        .attr('top', 0)
+        .attr('left', 0)
+        .attr('width', "100%")
+        .attr('height', "100%")
+        .attr('class', 'barGauge-linear-gauge')
+        .append('g')
+        .attr('transform', 'translate(' + options.left + ',' + options.top + ')');
 
-            d3.select("#barGauge")
-                .append('svg')
-                .attr('top', 0)
-                .attr('left', 0)
-                .attr('width', "100%")
-                .attr('height', "100%")
-                .attr('class', 'example-linear-gauge')
-                .append('g')
-                .attr('transform', 'translate(' + options.left + ',' + options.top + ')');
+    function updateReadings() {
+        // just pump in random data here...
+        var input =Math.random() * 100;
+        console.log("Readings update "+input);
+        render(input,0,100,"steelblue");
 
-
-            render(this);
-
-
-
-    // function onDocumentReady() {
-    //     define(['d3','jquery','BarGauge'],function (d3,$,BarGauge) {
-    //         var barGauge = Object.create(BarGauge);
-    //         console.log(barGauge);
-    //
-    //         //('#power-gauge', {
-    //         //     size: 300,
-    //         //     clipWidth: 300,
-    //         //     clipHeight: 300,
-    //         //     ringWidth: 60,
-    //         //     maxValue: 100,
-    //         //     transitionMs: 4000,
-    //         // });
-    //         // powerGauge.render();
-    //         //
-    //         // function updateReadings() {
-    //         //     // just pump in random data here...
-    //         //     var input =Math.random() * 100;
-    //         //     powerGauge.update(input);
-    //         //
-    //         // }
-    //         //
-    //         // // every few seconds update reading values
-    //         // updateReadings();
-    //         // setInterval(function() {
-    //         //     updateReadings();
-    //         // }, 5 * 1000);
-    //     })
-    // }
-
+            }
+    updateReadings();
+    setInterval(function() {
+        updateReadings();
+    }, 5 * 1000);
 
 
 
