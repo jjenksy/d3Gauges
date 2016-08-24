@@ -13,18 +13,33 @@ define(['d3'],function (d3) {
     };
 
 
+    /**
+     * Create a bargauge object that will be the root element
+     * @type {Object}
+     */
     BarGauge.prototype = Object.create(null);
     BarGauge.prototype.constructor = BarGauge;
 
 
         'use strict';
 
+    /**
+     * an object that holds the default params for the gauge
+     * @type {{left: number, top: number}}
+     */
         var options = {
             left: 20,
             top: 10
         };
 
 
+    /**
+     * get the values an min, max to be return to render
+     * @param val value passed and parsed
+     * @param min minimum gauge
+     * @param max maximum for gauge
+     * @returns {{max: *, min: *, data: *[]}}
+     */
         function makeModel(val, min , max) {
             var value=val,
                 autoScale = false,
@@ -59,7 +74,14 @@ define(['d3'],function (d3) {
                 }]
             };
         }
-        // function to create the scalable graph
+
+    /**
+     * @render renders the actual gauge to the dom
+     * @param val value that is passed to makeModel then returned as an objects
+     * @param min minimum gauge
+     * @param max max gauge
+     * @param color color of the moving bar
+     */
         function render(val , min , max, color) {
             var width =  800 - options.left * 2,
                 height = 50,
