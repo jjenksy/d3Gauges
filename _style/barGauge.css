@@ -1,0 +1,34 @@
+
+.barGauge-linear-grid-background {
+    fill: gray;
+
+}
+
+.barGauge-linear-grid line {
+    stroke: white;
+
+}
+
+.barGauge-linear-grid .barGauge-linear-minor line {
+    stroke-opacity: .5;
+
+
+}
+
+.barGauge-linear-grid text {
+    display: none;
+
+}
+
+.barGauge-linear-axis line {
+    stroke: white;
+
+
+}
+
+.barGauge-linear-axis path,
+.barGauge-linear-grid path {
+    display: none;
+
+}
+
