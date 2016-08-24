@@ -28,8 +28,8 @@ define(['d3'],function (d3) {
      * @type {{left: number, top: number}}
      */
         var options = {
-            left: 20,
-            top: 10
+            left: 60,
+            top: 20
         };
 
 
@@ -96,6 +96,7 @@ define(['d3'],function (d3) {
 
 
 
+
             // linear: progressing from one stage to another in a single series of steps
             //scale for your x value
             x = d3.scale.linear()
@@ -103,6 +104,7 @@ define(['d3'],function (d3) {
                 .domain([model.min, model.max])// determines the domain of the gauge and make dynamic
                 //The difference between the lowest and highest values. In {4, 6, 9, 3, 7} the lowest value is 3, and the highest is 9, so the range is 9 − 3 = 6.
                 .range([0, width]);
+
 
 
             y = d3.scale.linear()
@@ -118,10 +120,12 @@ define(['d3'],function (d3) {
             bk = gauge.selectAll(".barGauge-linear-gauge-background")
                 .data(model.data);
 
+
             //create a background rect and add a class to it
             bk.enter()
                 .append("rect")
-                .attr("class", "barGauge-linear-gauge-background");
+                .attr("class", "barGauge-linear-gauge-background")
+                .style("fill", "green");//sets the background color
 
             bk.attr("width", width)
                 .attr("height", height);
@@ -140,7 +144,6 @@ define(['d3'],function (d3) {
                 .call(ticksMinor) // calling the tickMinor
                 .selectAll(".barGauge-linear-tick")
                 .data(x.ticks(10), function(d) {
-                    console.log(d);
                     return d; })
                 .exit()
                 .classed("barGauge-linear-minor", true);
@@ -168,7 +171,7 @@ define(['d3'],function (d3) {
                 .attr("x", 0)
                 .attr("y", 0);
 
-            bar.attr("height", height ) //height of the moving bar
+            bar.attr("height", height/1.2 ) //height of the moving bar
                 .transition()
                 .attr("fill", color)//color of the moving bar
                 .attr("width", function (d) {
@@ -192,14 +195,17 @@ define(['d3'],function (d3) {
         .attr('left', 0)
         .attr('width', "100%")
         .attr('height', "100%")
+        .style('background', 'yellow') // give my elem a temp background color
         .attr('class', 'barGauge-linear-gauge')
         .append('g')
+        .attr('width', "100%")
+        .attr('height', "100%")
         .attr('transform', 'translate(' + options.left + ',' + options.top + ')');
 
     function updateReadings() {
         // just pump in random data here...
         var input =Math.random() * 100;
-        console.log("Readings update "+input);
+
         render(input,0,100,"steelblue");
 
             }
