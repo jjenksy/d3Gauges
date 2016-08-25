@@ -16,7 +16,7 @@ define(['d3'], function (d3) {
     VerticalGauge.prototype = Object.create(null);
     VerticalGauge.prototype.constructor = VerticalGauge;
 
-    function render(bardata) {
+    function render(bardata , barName) {
         var config = {
 
             vQuantitiveScale: 100,
@@ -44,15 +44,21 @@ define(['d3'], function (d3) {
             .domain([0, config.vQuantitiveScale])
             .range([0, height]);
 
-        // var xScale = d3.scale.ordinal()
-        //     .domain(d3.range(0, bardata.length))
-        //     .rangeBands([0, width], 0.2);
+        //the xscale for my bars xValues
+        var xScale = d3.scale.ordinal()
+            .domain(barName)
+            .rangeBands([0, width], 0.2);
 
 
         var tooltip = d3.select('body').append('div')
             .style('position', 'absolute')
             .style('padding', '0 10px')
             .style('background', 'white')
+            .style('opacity', 0);
+
+        var val = d3.select('#verticalGauge').append('div')
+            .style('position', 'absolute')
+            .style('padding', '0 20px')
             .style('opacity', 0);
 
         var myChart = d3.select('#verticalGauge').append('svg')
@@ -70,13 +76,18 @@ define(['d3'], function (d3) {
             .attr('y', height); //positions to gauge correctly on the y axis
 
 
+
         /**********************
          * @update update and transition the gauge
          * @param trans
          */
-        function update(trans) {
+        function update(trans , name) {
             myChart.transition()
                 .attr('height', function () {
+                    //update the dom with our current value
+                    val.transition()
+                        .style('opacity', .9);
+                    val.html("Current " +name+": "+ trans);
                     return yScale(trans);
                 })
                 .attr('y', function () {
@@ -103,6 +114,7 @@ define(['d3'], function (d3) {
                     .style('opacity', 1)
                     .style('fill', tempColor)
             });
+            // hGuide.html(trans);
 
         }
 
@@ -127,31 +139,30 @@ define(['d3'], function (d3) {
         vGuide.selectAll('line')
             .style({stroke: "#000"});
 
-        //todo setup horizantal axis
-        // var hAxis = d3.svg.axis()
-        //     .scale(config.barWidth)
-        //     .orient('bottom')
-        //     .tickValues('test');
+        // horizantal axis
+        var hAxis = d3.svg.axis()
+            .scale(xScale)
+            .orient('bottom');
 
-        // var hGuide = d3.select('svg').append('g');
-        // hAxis(hGuide);
-        // hGuide.attr('transform', 'translate(' + margin.left + ', ' + (height + margin.top) + ')');
-        // hGuide.selectAll('path')
-        //     .style({fill: 'none', stroke: "#000"});
-        // hGuide.selectAll('line')
-        //     .style({stroke: "#000"});
+        var hGuide = d3.select('svg').append('g');
+        hAxis(hGuide);
+        hGuide.attr('transform', 'translate(' + margin.left + ', ' + (height + margin.top) + ')');
+        hGuide.selectAll('path')
+            .style({ fill: 'none', stroke: "#000"});
+        hGuide.selectAll('line')
+            .style({  stroke: "#000"});
 
         return {update : update};
     }
 
 
 
-    var test = render([0]);
+    var test = render([0],['Voltage']);
     //data simulator
     function updateReadings() {
         // just pump in random data here...
         var input = Math.round(Math.random() * 90 +10);
-        test.update(input)
+        test.update(input, 'Voltage');
 
 
     }
