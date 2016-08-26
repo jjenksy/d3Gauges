@@ -133,7 +133,7 @@ define(['d3'], function (d3) {
             .attr('width', 30) //width of bar
             .attr('y', height)
             .style('fill', function(d,i) {
-                console.log(d);
+
                 return 'yellow';
             });
 
