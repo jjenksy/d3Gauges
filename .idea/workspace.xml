@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80e656ae-b3df-4299-8ad0-ca2bce97f7f5" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_assetsJS/verticalNeedleGauge.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verticalNeedleGauge.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assetsJS/verticalGauge.js" afterPath="$PROJECT_DIR$/_assetsJS/verticalGauge.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common.js" afterPath="$PROJECT_DIR$/common.js" />
     </list>
     <ignored path="d3Gauges.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,14 +39,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="verticalGauge.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_assetsJS/verticalGauge.js">
+      <file leaf-file-name="barGauge.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/barGauge.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#44#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="34">
+              <caret line="2" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="verticalNeedleGauge.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/verticalNeedleGauge.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="verticalNeedleGauge.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_assetsJS/verticalNeedleGauge.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="731">
+              <caret line="187" column="36" selection-start-line="187" selection-start-column="36" selection-end-line="187" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,7 +103,9 @@
         <option value="$PROJECT_DIR$/_assetsJS/barGauge.js" />
         <option value="$PROJECT_DIR$/verticalGauge.html" />
         <option value="$PROJECT_DIR$/common.js" />
+        <option value="$PROJECT_DIR$/verticalNeedleGauge.html" />
         <option value="$PROJECT_DIR$/_assetsJS/verticalGauge.js" />
+        <option value="$PROJECT_DIR$/_assetsJS/verticalNeedleGauge.js" />
       </list>
     </option>
   </component>
@@ -141,20 +164,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="d3Gauges" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="d3Gauges" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_assetsJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -172,14 +181,15 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\_assetsJS" />
-      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\js" />
-      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\_bin" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\_assetsJS" />
       <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\_assetsJS" />
+      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges" />
+      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\js" />
+      <recent name="C:\Users\JJenkins\Desktop\d3Gauges\d3Gauges\_bin" />
     </key>
   </component>
   <component name="RunManager">
@@ -257,7 +267,7 @@
       <workItem from="1472125042537" duration="13526000" />
       <workItem from="1472151425850" duration="635000" />
       <workItem from="1472213941316" duration="598000" />
-      <workItem from="1472216789941" duration="1822000" />
+      <workItem from="1472216789941" duration="11908000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1471980072016</created>
@@ -308,15 +318,22 @@
       <option name="project" value="LOCAL" />
       <updated>1472138959517</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added a gauge behind to show alarmable point areas">
+      <created>1472218650714</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1472218650714</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34185000" />
+    <option name="totallyTimeSpent" value="44271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24710222" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -373,7 +390,8 @@
     <MESSAGE value="add header comments" />
     <MESSAGE value="added render and update methods" />
     <MESSAGE value="added voltage value and header to gauge" />
-    <option name="LAST_COMMIT_MESSAGE" value="added voltage value and header to gauge" />
+    <MESSAGE value="added a gauge behind to show alarmable point areas" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a gauge behind to show alarmable point areas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -536,13 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_style/barGauge.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -550,24 +561,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/barGauge.html">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
+        <state relative-caret-position="197">
+          <caret line="485" column="0" selection-start-line="485" selection-start-column="0" selection-end-line="485" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_assetsJS/barGauge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="408">
           <caret line="133" column="21" selection-start-line="133" selection-start-column="21" selection-end-line="133" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+    <entry file="file://$PROJECT_DIR$/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="485" column="0" selection-start-line="485" selection-start-column="0" selection-end-line="485" selection-end-column="0" />
+        <state relative-caret-position="153">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_assetsJS/verticalGauge.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="86" column="8" selection-start-line="86" selection-start-column="11" selection-end-line="101" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/barGauge.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -579,13 +610,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_assetsJS/verticalGauge.js">
+    <entry file="file://$PROJECT_DIR$/verticalNeedleGauge.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#44#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_assetsJS/verticalNeedleGauge.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="187" column="36" selection-start-line="187" selection-start-column="36" selection-end-line="187" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>

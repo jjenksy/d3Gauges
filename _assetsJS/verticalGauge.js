@@ -71,29 +71,38 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(bardata)
             .enter().append('rect')
-            .style('fill', function (d, i) {
-                return 'red'; //todo make a map of colors
-            })
             .attr('width', 50) //width of bar
             .attr('y', height); //positions to gauge correctly on the y axis
 
         //alarm bar test area
-        alarmChart.transition()
-            .attr('height', function () {
-                //sets the height of the alarm bar
-                return yScale(100);
-            })
-            .attr('y', function () {
-                return height - yScale(100);
-            })
-            .delay(function (d, i) {
-                return i * 20;
-            })
-            .duration(1000)
-            .ease('elastic');
+        //create the data for my ticks
+        var testData = 100,
+        tickData = d3.range(testData).map(function (d) {
+            if (d % 10 === 0){
+                return d;
+            }
+
+        });
+
+        // alarmChart.transition()
+        //     .attr('height', function () {
+        //         //sets the height of the alarm bar
+        //         return yScale(testData);
+        //     })
+        //     .attr('y', function () {
+        //         return height - yScale(testData);
+        //     })
+        //     .delay(function (d, i) {
+        //         return i * 20;
+        //     })
+        //     .style('fill', function (d) {
+        //         return 'red'; //todo make a map of colors
+        //     })
+        //     .duration(1000)
+        //     .ease('elastic');
 
         var myChart =  d3.select('.svg_')
-            .style('background', '#E7E0CB')
+            .style('background', 'transparent')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
             .append('g')
@@ -123,7 +132,7 @@ define(['d3'], function (d3) {
                 .attr('y', function () {
                     return height - yScale(trans);
                 })
-                .style('opacity', .9)//set the opacity for the value bar
+                .style('opacity', 1)//set the opacity for the value bar
                 .delay(function (d, i) {
                     return i * 20;
                 })
