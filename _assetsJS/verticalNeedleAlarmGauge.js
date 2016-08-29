@@ -6,7 +6,7 @@ define(['d3'], function (d3) {
     'use strict';
 
     //create an pointless constructor
-    var VerticalNeedleGauge = function () {
+    var VerticalNeedleAlarmGauge = function () {
     };
 
 
@@ -14,8 +14,8 @@ define(['d3'], function (d3) {
      * Create a  VerticalGauge object
      * @type {Object}
      */
-    VerticalNeedleGauge.prototype = Object.create(null);
-    VerticalNeedleGauge.prototype.constructor = VerticalNeedleGauge;
+    VerticalNeedleAlarmGauge.prototype = Object.create(null);
+    VerticalNeedleAlarmGauge.prototype.constructor = VerticalNeedleAlarmGauge;
 
     function render(bardata , barName) {
         var config = {
@@ -69,7 +69,7 @@ define(['d3'], function (d3) {
             .style('background', 'white')
             .style('opacity', 0);
 
-        var val = d3.select('#verticalNeedleGauge').append('div')
+        var val = d3.select('#verticalNeedleAlarmGauge').append('div')
             .style('position', 'absolute')
             .style('padding', '0 20px')
             .style('opacity', 0);
@@ -81,7 +81,7 @@ define(['d3'], function (d3) {
                 //----------------------alarm area svg
         var x;
         //create the svg that everything lives on
-        var alarmBar = d3.select('#verticalNeedleGauge')
+        var alarmBar = d3.select('#verticalNeedleAlarmGauge')
             .append('svg')
             .attr("class", "svg_")
             .attr('width', width + margin.left + margin.right)
@@ -96,10 +96,10 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(tickDataArray)
             .enter().append('rect')
-            .attr('width', 30) //width of bar
+            .attr('width', 40) //width of bar
             .attr('y', height)
             .style('fill', function(d,i) {
-                console.log(d);
+              //  console.log(d);
                 return 'red';
             });
 
@@ -130,7 +130,7 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(tickDataArray)
             .enter().append('rect')
-            .attr('width', 30) //width of bar
+            .attr('width', 40) //width of bar
             .attr('y', height)
             .style('fill', function(d,i) {
 
@@ -165,10 +165,10 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(tickDataArray)
             .enter().append('rect')
-            .attr('width', 30) //width of bar
+            .attr('width', 40) //width of bar
             .attr('y', height)
             .style('fill', function(d,i) {
-                console.log(d);
+              //
                 return 'green';
             });
 
@@ -199,7 +199,7 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(tickDataArray)
             .enter().append('rect')
-            .attr('width', 30) //width of bar
+            .attr('width', 40) //width of bar
             .attr('y', height)
             .style('fill', function(d,i) {
                 return 'yellow';
@@ -233,7 +233,7 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(tickDataArray)
             .enter().append('rect')
-            .attr('width', 30) //width of bar
+            .attr('width', 40) //width of bar
             .attr('y', height)
             .style('fill', function(d,i) {
 
@@ -264,16 +264,28 @@ define(['d3'], function (d3) {
         var myChart =  d3.select('.svg_')
             .style('background', 'transparent')
             .append('g')
-            .attr('transform', 'translate(' + 25+ ', ' + margin.top + ')')
+            .attr('transform', 'translate(' +  margin.left + ', ' + margin.top + ')')
             .selectAll('rect').data(bardata)
             .enter().append('rect')
+            .attr("class", "rect")
             .style('fill', function (d, i) {
-                return 'steelblue'; //todo make a map of colors
+                return 'transparent'; //making tranparnet so we can debug in browser
             })
-            .attr('width', 25) //width of bar
+            .attr('width', 25); //width of bar
 
 
+        //playing aroung with appending a triangle
+       var triangle =  d3.select('.svg_')
+            .append('path')
+            .attr('d', function(d) {
+                var x = 100, y = 100;
+                return 'M ' + x +' '+ y + ' l 50 20 v -40 0 z';  // v to draw a vertical line l <num 1 extends triangle
+            })
+            .attr('fill', 'steelblue');
+        //begin test code
 
+
+        //end test code---------------------------------
 
         /**********************
          * @update update and transition the gauge
@@ -295,6 +307,18 @@ define(['d3'], function (d3) {
                 .delay(function (d, i) {
                     return i * 20;
                 })
+                .duration(1000)
+                .ease('elastic');
+
+            triangle.transition()
+                .attr('transform', function() {
+                    var h = -70 + height - yScale(trans);
+                    console.log(trans);
+
+                return "translate(" +-50+ "," + h + ")";
+            }).delay(function (d, i) {
+                return i * 20;
+            })
                 .duration(1000)
                 .ease('elastic');
 
@@ -329,7 +353,7 @@ define(['d3'], function (d3) {
         //place the vguide scale and set the ticks
         var vAxis = d3.svg.axis()
             .scale(vGuideScale)
-            .orient('left')
+            .orient('right')
             .ticks(config.vGuideTicks);
 
         var vGuide = d3.select('svg').append('g');
@@ -378,7 +402,7 @@ define(['d3'], function (d3) {
 
 
     // return the PowerOneLine module
-    return VerticalNeedleGauge;
+    return VerticalNeedleAlarmGauge;
 
 
 });

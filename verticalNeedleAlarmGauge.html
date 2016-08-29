@@ -7,7 +7,7 @@
 </head>
 <body>
 <!--id we will target with d3select in order to use gauge-->
-<div id="verticalNeedleGauge"></div>
+<div id="verticalNeedleAlarmGauge"></div>
 
 <!-- using the requireJS module loader to handle all my imports -->
 <script data-main="common.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
@@ -15,7 +15,7 @@
     // insures all modules are loaded before my page home is called
     require(['common'], function () {
         // require d3Tree as my module whatever your main file is for your html page is what you require
-        require(['verticalNeedleGauge']);
+        require(['verticalNeedleAlarmGauge']);
     })
 </script>
 </body>
