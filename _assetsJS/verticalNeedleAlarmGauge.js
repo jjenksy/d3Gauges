@@ -316,7 +316,8 @@ define(['d3'], function (d3) {
                     console.log(trans);
 
                 return "translate(" +-50+ "," + h + ")";
-            }).delay(function (d, i) {
+            }).style('opacity', 0.8)
+                .delay(function (d, i) {
                 return i * 20;
             })
                 .duration(1000)
@@ -338,7 +339,7 @@ define(['d3'], function (d3) {
             //         .style('opacity', 1)
             //         .style('fill', tempColor)
             // });
-            hGuide.html(trans);
+            //hGuide.html(trans);
 
 
         }
