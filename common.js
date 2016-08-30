@@ -6,6 +6,7 @@ require.config({
         d3: 'd3.v3.min',
         jquery:'jquery-3.1.0.min',
         BarGauge:'barGauge',
-        VerticalGauge:'verticalGauge'
+        VerticalGauge:'verticalGauge',
+        VerticalNeedleGauge:'verticalNeedleGauge'
     }
 });

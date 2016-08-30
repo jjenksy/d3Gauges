@@ -10,7 +10,7 @@ define(['d3'], function (d3) {
 
 
     /**
-     * Create a bargauge object that will be the root element
+     * Create a  VerticalGauge object
      * @type {Object}
      */
     VerticalGauge.prototype = Object.create(null);
@@ -61,8 +61,48 @@ define(['d3'], function (d3) {
             .style('padding', '0 20px')
             .style('opacity', 0);
 
-        var myChart = d3.select('#verticalGauge').append('svg')
-            .style('background', '#E7E0CB')
+
+        //----------------------alarm area svg
+        var alarmChart = d3.select('#verticalGauge').append('svg')
+            .attr("class", "svg_")
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height  + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+            .selectAll('rect').data(bardata)
+            .enter().append('rect')
+            .attr('width', 50) //width of bar
+            .attr('y', height); //positions to gauge correctly on the y axis
+
+        //alarm bar test area
+        //create the data for my ticks
+        var testData = 100,
+        tickData = d3.range(testData).map(function (d) {
+            if (d % 10 === 0){
+                return d;
+            }
+
+        });
+
+        // alarmChart.transition()
+        //     .attr('height', function () {
+        //         //sets the height of the alarm bar
+        //         return yScale(testData);
+        //     })
+        //     .attr('y', function () {
+        //         return height - yScale(testData);
+        //     })
+        //     .delay(function (d, i) {
+        //         return i * 20;
+        //     })
+        //     .style('fill', function (d) {
+        //         return 'red'; //todo make a map of colors
+        //     })
+        //     .duration(1000)
+        //     .ease('elastic');
+
+        var myChart =  d3.select('.svg_')
+            .style('background', 'transparent')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
             .append('g')
@@ -70,10 +110,11 @@ define(['d3'], function (d3) {
             .selectAll('rect').data(bardata)
             .enter().append('rect')
             .style('fill', function (d, i) {
-                return 'green'; //todo make a map of colors
+                return 'steelblue'; //todo make a map of colors
             })
             .attr('width', config.barWidth) //width of bar
             .attr('y', height); //positions to gauge correctly on the y axis
+
 
 
 
@@ -85,36 +126,37 @@ define(['d3'], function (d3) {
             myChart.transition()
                 .attr('height', function () {
                     //update the dom with our current value
-                    val.transition()
-                        .style('opacity', .9);
                     val.html("Current " +name+": "+ trans);
                     return yScale(trans);
                 })
                 .attr('y', function () {
                     return height - yScale(trans);
                 })
+                .style('opacity', 1)//set the opacity for the value bar
                 .delay(function (d, i) {
                     return i * 20;
                 })
                 .duration(1000)
                 .ease('elastic');
-            myChart.on('mouseover', function () { //tooltip for my mouseover
-                tooltip.transition()
-                    .style('opacity', .9);
-                tooltip.html(trans)
-                    .style('left', (d3.event.pageX - 35) + 'px')
-                    .style('top', (d3.event.pageY - 30) + 'px');
-                tempColor = this.style.fill;
-                d3.select(this)
-                    .style('opacity', .5)
-                    .style('fill', 'yellow')
-            }).on('mouseout', function () {
-                console.log(this);
-                d3.select(this)
-                    .style('opacity', 1)
-                    .style('fill', tempColor)
-            });
-            // hGuide.html(trans);
+
+            // myChart.on('mouseover', function () { //tooltip for my mouseover
+            //     tooltip.transition()
+            //         .style('opacity', .9);
+            //     tooltip.html(trans)
+            //         .style('left', (d3.event.pageX - 35) + 'px')
+            //         .style('top', (d3.event.pageY - 30) + 'px');
+            //     tempColor = this.style.fill;
+            //     d3.select(this)
+            //         .style('opacity', .5)
+            //         .style('fill', 'yellow')
+            // }).on('mouseout', function () {
+            //     console.log(this);
+            //     d3.select(this)
+            //         .style('opacity', 1)
+            //         .style('fill', tempColor)
+            // });
+            hGuide.html(trans);
+
 
         }
 
